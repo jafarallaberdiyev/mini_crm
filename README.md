@@ -1,31 +1,63 @@
-# Mini-CRM: Система бронирования ресурсов
+# Mini-CRM — Room Booking System
 
-Система для управления студентами, комнатами и бронированиями в учебном центре.
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-4.2-092E20?logo=django&logoColor=white)
+![DRF](https://img.shields.io/badge/DRF-3.14-A30000)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Установка
+REST API for a training center: manage **students**, **rooms** and **bookings**, with protection against double-booking a room for overlapping time slots.
 
-1. Клонировать репозиторий
-2. Создать виртуальное окружение: `python -m venv venv`
-3. Активировать окружение: `venv\Scripts\activate` (Windows) или `source venv/bin/activate` (Unix)
-4. Установить зависимости: `pip install -r requirements.txt`
-5. Создать базу данных PostgreSQL: `mini_crm`
-6. Настроить переменные окружения в файле `.env`
-7. Выполнить миграции: `python manage.py migrate`
-8. Создать суперпользователя: `python manage.py createsuperuser`
-9. Запустить сервер: `python manage.py runserver`
+> 🇷🇺 Система для управления студентами, комнатами и бронированиями в учебном центре. Инструкция по установке ниже.
 
-## API Endpoints
+## Features
 
-- Студенты: `GET/POST /api/students/`
-- Загрузка аватара: `POST /api/students/{id}/upload_avatar/`
-- Комнаты: `GET/POST /api/rooms/`
-- Бронирования: `GET/POST /api/bookings/`
+- **Students** — CRUD, unique email, avatar upload to Cloudinary
+- **Rooms** — lecture / computer / conference / studio types with capacity
+- **Bookings** — time-slot reservations with overlap (conflict) checks
+- Pagination, Swagger & ReDoc API docs, Django admin
 
-## Документация API
+## Tech stack
 
-- Swagger: http://localhost:8000/swagger/
-- ReDoc: http://localhost:8000/redoc/
+Django 4.2 · Django REST Framework · PostgreSQL · Cloudinary · drf-yasg
 
-## Админка
+## Getting started / Установка
 
-http://localhost:8000/admin/
+```bash
+git clone https://github.com/jafarallaberdiyev/mini_crm.git
+cd mini_crm/mini_crm
+
+python -m venv venv
+venv\Scripts\activate          # Windows
+# source venv/bin/activate     # macOS / Linux
+
+pip install -r requirements.txt
+cp .env.example .env           # then fill in your own values
+```
+
+Create a PostgreSQL database named `mini_crm` (or set `DB_NAME` in `.env`), then:
+
+```bash
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+## API endpoints
+
+| Resource | Endpoint |
+|---|---|
+| Students | `GET/POST /api/students/` |
+| Upload avatar | `POST /api/students/{id}/upload_avatar/` |
+| Rooms | `GET/POST /api/rooms/` |
+| Bookings | `GET/POST /api/bookings/` |
+
+## API docs
+
+- Swagger UI — http://localhost:8000/swagger/
+- ReDoc — http://localhost:8000/redoc/
+- Admin — http://localhost:8000/admin/
+
+## License
+
+[MIT](LICENSE)
